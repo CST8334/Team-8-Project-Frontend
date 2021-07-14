@@ -1,6 +1,6 @@
 import React from "react";
 import loginImg from "../assets/img/loginx.svg";
-import "../assets/css/style.css";
+import "../assets/css/style.scss";
 import { Link, Route, NavLink } from "react-router-dom";
 import Admin from "./Admin.js";
 import { GoogleLogin } from "react-google-login";
@@ -64,12 +64,10 @@ function Login() {
               Login
             </button>
           </NavLink>
-          <br />
-          <label htmlFor="username">Or</label>
-          <br />
-          <br />
         </div>
-
+        <div>
+          <label htmlFor="username">Or</label>
+        </div>
         <div>
           <GoogleLogin
             clientId={clientId}
@@ -77,7 +75,9 @@ function Login() {
             onSuccess={onSuccess}
             onFailure={onFailure}
             cookiePolicy={"single_host_origin"}
-            style={{ marginTop: "100px" }}
+            style={{
+              marginTop: "100px",
+            }}
             isSignedIn={true}
           />
 
