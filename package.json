@@ -6,6 +6,7 @@
     "axios": "^0.21.1",
     "bootstrap": "4.6.0",
     "chartist": "0.10.1",
+    "focus-trap-react": "^8.7.0",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
     "node-sass": "4.14.1",
