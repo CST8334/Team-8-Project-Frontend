@@ -1,8 +1,16 @@
+import ModalContainer from '../components/ModalContainer'
 import React, { Component } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
 
 const influencerList = [];
+
+const createAdCardText = "Create New Ad Card";
+//TODO: Update this event to make a POST request to Ad Card database
+const onSubmitAdCard = (event) => {
+    event.preventDefault(event);
+    console.log(event.target);
+};
 
 const getItems = (count, offset = 0) =>
   Array.from({ length: count }, (v, k) => k).map((k) => ({
@@ -160,11 +168,14 @@ class BrandCampaignBuilder extends Component {
                   {provided.placeholder}
                 </div>
               )}
-            </Droppable>
-            <br />
-            <h3>Active Ad Campaigns (Mock)</h3>
-            <br />
-            <Droppable droppableId="droppable2" direction="horizontal">
+                    </Droppable>
+                    <br />
+                    <div>
+                        <ModalContainer triggerText={createAdCardText} onSubmit={onSubmitAdCard} />
+                    </div>
+                    <h3>Active Ad Campaigns (Mock)</h3>
+                    <br />
+                    <Droppable droppableId="droppable2" direction="horizontal">
               {(provided, snapshot) => (
                 <div
                   ref={provided.innerRef}
