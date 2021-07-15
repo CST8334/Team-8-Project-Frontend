@@ -32,6 +32,7 @@ function Login() {
     console.log("GoogleToken:", res.accessToken);
     history.push("/admin/dashboard");
 
+
   };
 
   const onFailure = (res) => {
