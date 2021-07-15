@@ -90,7 +90,7 @@ function Login() {
           <label htmlFor="username">Or</label>
         </div>
         <div>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <GoogleLogin
             clientId={clientId}
             buttonTest="Login"
