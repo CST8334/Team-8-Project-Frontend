@@ -1,16 +1,19 @@
 import React from "react";
 import loginImg from "../assets/img/loginx.svg";
 import "../assets/css/style.scss";
-import { Link, Route, NavLink } from "react-router-dom";
+import { Link, Route, NavLink, useHistory } from "react-router-dom";
 import Admin from "./Admin.js";
 import { GoogleLogin } from "react-google-login";
 
 const clientId =
   "165473491550-n2vqg5nucfo8ralusl59adqgbqu65so6.apps.googleusercontent.com";
 
+
 function Login() {
+    const history = useHistory();
   const onSuccess = (res) => {
-    console.log("[Login Success] currentUser:", res.profileObj);
+      console.log("[Login Success] currentUser:", res.profileObj);
+      history.push("/admin/dashboard");
   };
 
   const onFailure = (res) => {

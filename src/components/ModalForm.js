@@ -43,22 +43,8 @@ class ModalForm extends React.Component {
             + '\nPlatform: ' + this.state.platform
             + '\nDeadline: ' + this.state.deadline);
         axios.post('http://localhost:8000/new-brand-card/',
-            /*  {
-                  creator_campaign: '1',
-                  brand_campaign: '1',
-                  state: '1',
-                  price: this.state.price,
-                  platform: this.state.platform,
-                  execution_deadline: this.state.deadline,
-                  creation_time: '1',
-                  dreamwell_approval_time: '1',
-                  dreamwell_rejection_time: '1',
-                  completion_time: '1',
-                  brand_user: '1',
-                  creator_user: '1',
-                  brand_organization: '1',
-                  description: this.state.details
-              });*/
+          
+              
             {
 
                 "creator_campaign": null,
