@@ -32,6 +32,7 @@ function Login() {
     console.log("GoogleToken:", res.accessToken);
     history.push("/admin/dashboard");
 
+
   };
 
   const onFailure = (res) => {
@@ -90,7 +91,7 @@ function Login() {
           <label htmlFor="username">Or</label>
         </div>
         <div>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <GoogleLogin
             clientId={clientId}
             buttonTest="Login"
