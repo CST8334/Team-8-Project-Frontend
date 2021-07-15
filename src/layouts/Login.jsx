@@ -4,16 +4,35 @@ import "../assets/css/style.scss";
 import { Link, Route, NavLink, useHistory } from "react-router-dom";
 import Admin from "./Admin.js";
 import { GoogleLogin } from "react-google-login";
+import InstagramLogin from "react-instagram-oauth";
 
+//GoogleOAuth data
 const clientId =
   "165473491550-n2vqg5nucfo8ralusl59adqgbqu65so6.apps.googleusercontent.com";
 
+//InstagramLogin data
+const instagramAppId = "346267973657694";
+const instagramAppSecret = "5bb4bd49966847971d24bb247118f1f9";
 
 function Login() {
-    const history = useHistory();
+  const history = useHistory();
+
+  //setting up Instagram connection
+  const authHandler = (err, data) => {
+    console.log(err, data);
+    //needs to validate login
+    //history.push("/admin/dashboard");
+  };
+
   const onSuccess = (res) => {
-      console.log("[Login Success] currentUser:", res.profileObj);
-      history.push("/admin/dashboard");
+    console.log("Successful login! Here is the user data:");
+    console.log("GoogleId:", res.googleId);
+    console.log("GoogleName:", res.profileObj.name);
+    console.log("GoogleEmail:", res.profileObj.email);
+    console.log("GoogleToken:", res.accessToken);
+    history.push("/admin/dashboard");
+
+
   };
 
   const onFailure = (res) => {
@@ -72,7 +91,7 @@ function Login() {
           <label htmlFor="username">Or</label>
         </div>
         <div>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <GoogleLogin
             clientId={clientId}
             buttonTest="Login"
@@ -87,10 +106,16 @@ function Login() {
 
           <br />
           <br />
-          <a href="#" class="instagram btn">
-            <i class=" fab fa-instagram">&nbsp;&nbsp;&nbsp;&nbsp;</i> Login with
-            Instagram
-          </a>
+
+          <InstagramLogin
+              authCallback={authHandler}
+              appId={instagramAppId}
+              appSecret={instagramAppSecret}
+              redirectUri={"/admin/dashboard"}
+          />
+
+          <br />
+          <br />
         </div>
       </div>
     </div>
