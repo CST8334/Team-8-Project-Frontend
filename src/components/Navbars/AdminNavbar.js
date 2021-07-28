@@ -26,8 +26,12 @@ function Header() {
     function Logout()
     {
     console.clear();
-    history.push("/login");
-
+    var auth2 = gapi.auth2.getAuthInstance();
+	    auth2.signOut().then(function () {
+	    auth2.signOut();
+	    history.push("/");
+       	console.log('User signed out.');
+	   });
     }
 
   const location = useLocation();
