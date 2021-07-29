@@ -26,12 +26,14 @@ function Header() {
     function Logout()
     {
     console.clear();
+    // to implement the google logout
     var auth2 = gapi.auth2.getAuthInstance();
 	    auth2.signOut().then(function () {
-	    auth2.signOut();
-	    history.push("/");
+	    //auth2.signOut();
        	console.log('User signed out.');
+        history.push("/");
 	   });
+	   auth2.disconnect();
     }
 
   const location = useLocation();
