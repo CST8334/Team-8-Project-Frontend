@@ -16,12 +16,26 @@
 
 */
 import React, { Component } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation,useHistory } from "react-router-dom";
 import { Navbar, Container, Nav, Dropdown, Button } from "react-bootstrap";
 
 import routes from "routes.js";
 
 function Header() {
+    const history = useHistory();
+    function Logout()
+    {
+    console.clear();
+    // to implement the google logout
+    var auth2 = gapi.auth2.getAuthInstance();
+	    auth2.signOut().then(function () {
+	    //auth2.signOut();
+       	console.log('User signed out.');
+        history.push("/");
+	   });
+	   auth2.disconnect();
+    }
+
   const location = useLocation();
   const mobileSidebarToggle = (e) => {
     e.preventDefault();
@@ -198,7 +212,7 @@ function Header() {
                 href="#pablo"
                 onClick={(e) => e.preventDefault()}
               >
-                <span className="no-icon">Log out</span>
+                <span className="no-icon" onClick={Logout}>Log out</span>
               </Nav.Link>
             </Nav.Item>
           </Nav>
