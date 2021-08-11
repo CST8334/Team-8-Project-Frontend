@@ -9,6 +9,7 @@
 * Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard-react/blob/master/LICENSE.md)
 
 * Coded by Creative Tim
+* Added google logout function by Chrishanthi Michael for CST8334 - Software Development Project
 
 =========================================================
 
@@ -22,17 +23,23 @@ import { Navbar, Container, Nav, Dropdown, Button } from "react-bootstrap";
 import routes from "routes.js";
 
 function Header() {
+    // initialize the user history instance that we can use to navigate
     const history = useHistory();
+    // the function to logout the user
     function Logout()
     {
     console.clear();
-    // to implement the google logout
+
+    // implement the google logout function
     var auth2 = gapi.auth2.getAuthInstance();
 	    auth2.signOut().then(function () {
-	    //auth2.signOut();
        	console.log('User signed out.');
+
+       	// push the url to root on sign out
         history.push("/");
 	   });
+
+	   // Disconnecting and revoking login session
 	   auth2.disconnect();
     }
 

@@ -1,6 +1,17 @@
+/**
+*
+* Coded by Chrishanthi Michael for CST8334 - Software Development Project
+*
+* this class is responsible to create the login page user interface
+* and login with google account and instagram account
+*
+*/
+
+// importing the libraries
 import React from "react";
 import loginImg from "../assets/img/loginx.svg";
 import "../assets/css/style.scss";
+import axios from "axios";
 import { Link, Route, NavLink, useHistory } from "react-router-dom";
 import Admin from "./Admin.js";
 import { GoogleLogin } from "react-google-login";
@@ -15,6 +26,7 @@ const instagramAppId = "346267973657694";
 const instagramAppSecret = "5bb4bd49966847971d24bb247118f1f9";
 
 function Login() {
+  // initialize the user history instance that we can use to navigate
   const history = useHistory();
 
   //setting up Instagram connection
@@ -24,6 +36,8 @@ function Login() {
     //history.push("/admin/dashboard");
   };
 
+  // log the response on onSuccess login
+  // and push the url to admin dashboard
   const onSuccess = (res) => {
     console.log("Successful login! Here is the user data:");
     console.log("GoogleId:", res.googleId);
@@ -35,10 +49,12 @@ function Login() {
 
   };
 
+  // log the response on onFailure
   const onFailure = (res) => {
     console.log("[Login Failed] res:", res);
   };
 
+  // HTML Code to create the Login page
   return (
     <div
       className="p-1"
