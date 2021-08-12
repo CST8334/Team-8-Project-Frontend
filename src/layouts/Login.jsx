@@ -39,12 +39,11 @@ function onSubmit(){
         axios.post(`http://localhost:8000/login/`, postBody)
             .then((response) => {
                 console.log(response);
-                console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx");
                 // Store email and token in local storage
-               // localStorage.setItem('email', response.data.email);
-               // localStorage.setItem('token', response.data.token);
+                localStorage.setItem('logintype', "localaccount");
                 //this.changeModalState(true);
                 //history.push("/admin/dashboard");
+                console.log(localStorage.getItem("logintype"));
                 window.location.href = "http://localhost:3000/admin/dashboard";
 
             }, (error) => {
@@ -86,6 +85,7 @@ function Login() {
     console.log("GoogleName:", res.profileObj.name);
     console.log("GoogleEmail:", res.profileObj.email);
     console.log("GoogleToken:", res.accessToken);
+    localStorage.setItem('logintype', "googleaccount");
     history.push("/admin/dashboard");
 
 

@@ -29,7 +29,12 @@ function Header() {
     function Logout()
     {
     console.clear();
-
+    if (localStorage.getItem("logintype")=="localaccount")
+    {
+            localStorage.clear()
+            history.push("/");
+    }
+    else {
     // implement the google logout function
     var auth2 = gapi.auth2.getAuthInstance();
 	    auth2.signOut().then(function () {
@@ -41,6 +46,7 @@ function Header() {
 
 	   // Disconnecting and revoking login session
 	   auth2.disconnect();
+	}
     }
 
   const location = useLocation();
