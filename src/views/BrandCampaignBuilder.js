@@ -1,14 +1,23 @@
+import ModalContainer from '../components/ModalContainer'
 import React, { Component } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
 
 const influencerList = [];
+const priceList = [];
+
+const createAdCardText = "Create New Ad Card";
+//TODO: Update this event to make a POST request to Ad Card database
+const onSubmitAdCard = (event) => {
+    event.preventDefault(event);
+    console.log(event.target);
+};
 
 const getItems = (count, offset = 0) =>
   Array.from({ length: count }, (v, k) => k).map((k) => ({
     id: `item-${k + offset}`,
-    price: (k + offset + 1) * 100,
-    content: `Influencer: ${influencerList[k]} Price $${k + offset + 1}00`,
+    price: priceList[k],
+    content: `Product ${k + 1}: Price $${priceList[k]}`,
   }));
 
 const reorder = (list, startIndex, endIndex) => {
@@ -59,14 +68,19 @@ class BrandCampaignBuilder extends Component {
     selected: getItems(0),
   };
 
-  componentDidMount() {
-    while (influencerList.length > 0) {
-      influencerList.pop();
-    }
-    axios.get("http://127.0.0.1:8000/influencers/").then((result) => {
-      console.log("You hit me" + result.data["influencer_name"]);
+    componentDidMount() {
+        while (influencerList.length > 0) {
+            influencerList.pop();
+        }
+        while (priceList.length > 0) {
+            priceList.pop();
+        }
+    
+    axios.get("http://127.0.0.1:8000/brand-ad-cards/").then((result) => {
+      
       for (let i = 0; i < result.data.length; i++) {
-        influencerList.push(result.data[i]["influencer_name"]);
+          influencerList.push(result.data[i]["brand_organization"]);
+          priceList.push(result.data[i]["price"]);
       }
       this.setState({
         items: getItems(influencerList.length),
@@ -160,11 +174,14 @@ class BrandCampaignBuilder extends Component {
                   {provided.placeholder}
                 </div>
               )}
-            </Droppable>
-            <br />
-            <h3>Active Ad Campaigns (Mock)</h3>
-            <br />
-            <Droppable droppableId="droppable2" direction="horizontal">
+                    </Droppable>
+                    <br />
+                    <div>
+                        <ModalContainer triggerText={createAdCardText} onSubmit={onSubmitAdCard} />
+                    </div>
+                    <h3>Active Ad Campaigns (Mock)</h3>
+                    <br />
+                    <Droppable droppableId="droppable2" direction="horizontal">
               {(provided, snapshot) => (
                 <div
                   ref={provided.innerRef}
