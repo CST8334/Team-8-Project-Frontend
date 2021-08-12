@@ -1,14 +1,9 @@
-import { act } from "react-dom/test-utils";
-
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { MemoryRouter } from "react-router-dom";
 import AdminLayout from "layouts/Admin.js";
 import Login from "layouts/Login.jsx";
-import Register from "layouts/Register.js";
-import { createMemoryHistory } from "history";
 
 let container;
 beforeEach(() => {
