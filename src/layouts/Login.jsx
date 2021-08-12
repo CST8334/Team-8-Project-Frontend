@@ -8,7 +8,8 @@
 */
 
 // importing the libraries
-import React from "react";
+//import React from "react";
+import React, { Component } from "react";
 import loginImg from "../assets/img/loginx.svg";
 import "../assets/css/style.scss";
 import axios from "axios";
@@ -24,6 +25,47 @@ const clientId =
 //InstagramLogin data
 const instagramAppId = "346267973657694";
 const instagramAppSecret = "5bb4bd49966847971d24bb247118f1f9";
+
+function onSubmit(){
+    console.log("User Name is " +document.getElementById("username").value);
+    console.log("Password is " +document.getElementById("password").value);
+    if (document.getElementById("username").value != "" && document.getElementById("password").value != "")
+    {
+        const postBody = {
+            "user_type": "creator",
+            "username": document.getElementById("username").value,
+            "password": document.getElementById("password").value,
+        };
+        axios.post(`http://localhost:8000/login/`, postBody)
+            .then((response) => {
+                console.log(response);
+                console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx");
+                // Store email and token in local storage
+               // localStorage.setItem('email', response.data.email);
+               // localStorage.setItem('token', response.data.token);
+                //this.changeModalState(true);
+                //history.push("/admin/dashboard");
+                window.location.href = "http://localhost:3000/admin/dashboard";
+
+            }, (error) => {
+                //const stateCpy = { ...this.state };
+                //stateCpy.showError = true;
+                if (error.response.data.error_message) {
+                    stateCpy.errorMsg = error.response.data.error_message;
+                } else if (error.response.data.email) {
+                    stateCpy.errorMsg = error.response.data.email[0];
+                } else {
+                    stateCpy.errorMsg = 'Unknown error occurred';
+                }
+                console.error(error.response);
+                this.setState(stateCpy);
+            });
+    }
+    else
+    {
+        console.log("Please enter the username and password");
+    }
+}
 
 function Login() {
   // initialize the user history instance that we can use to navigate
@@ -78,6 +120,7 @@ function Login() {
             <input
               type="text"
               name="username"
+              id = "username"
               placeholder="Type your username"
             />
           </div>
@@ -87,6 +130,7 @@ function Login() {
             <input
               type="password"
               name="password"
+              id="password"
               placeholder="Type your password"
             />
 
@@ -97,11 +141,9 @@ function Login() {
           </div>
         </div>
         <div className="footer">
-          <NavLink to="/admin/dashboard">
-            <button type="button" className="btn btn-primary">
+            <button type="button" className="btn btn-primary" onClick={() => onSubmit()}>
               Login
             </button>
-          </NavLink>
         </div>
         <div>
           <label htmlFor="username">Or</label>
