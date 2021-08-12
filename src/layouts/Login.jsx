@@ -8,7 +8,8 @@
 */
 
 // importing the libraries
-import React from "react";
+//import React from "react";
+import React, { Component } from "react";
 import loginImg from "../assets/img/loginx.svg";
 import "../assets/css/style.scss";
 import axios from "axios";
@@ -24,6 +25,45 @@ const clientId =
 //InstagramLogin data
 const instagramAppId = "346267973657694";
 const instagramAppSecret = "5bb4bd49966847971d24bb247118f1f9";
+
+// this onSubmit method is responsible for local user login
+function onSubmit(){
+    console.log("Local User Name is " +document.getElementById("username").value);
+    console.log("Password is " +document.getElementById("password").value);
+
+    // make sure the user enter the username and password for the local login
+    // if the fields are not empty, make the call to the endpoint to validate the login
+    if (document.getElementById("username").value != "" && document.getElementById("password").value != "")
+    {
+        // create the json object called loginData with username and password for call the login endpoint
+        const loginData = {
+            "user_type": "creator",
+            "username": document.getElementById("username").value,
+            "password": document.getElementById("password").value,
+        };
+        // call the backend login endpoint with login data
+        axios.post(`http://localhost:8000/login/`, loginData)
+            .then((response) => {
+                // on success login, write the response to the console
+                console.log(response);
+                // Store the logintype data in local storage, this will be used in the logout function
+                localStorage.setItem('logintype', "localaccount");
+
+                //console.log(localStorage.getItem("logintype"));
+                // on success login, redirect to the dashboard page.
+                window.location.href = "http://localhost:3000/admin/dashboard";
+
+            }, (error) => {
+                // if the username or password is incorrect, alert the user
+                var myWindow = window.alert("Local Login Failed. Please check the username and password")
+            });
+    }
+    else
+    {
+        // if the user did not enter the username or password, just alert them to enter it
+        var myWindow = window.alert("Please enter local username and password")
+    }
+}
 
 function Login() {
   // initialize the user history instance that we can use to navigate
@@ -44,6 +84,8 @@ function Login() {
     console.log("GoogleName:", res.profileObj.name);
     console.log("GoogleEmail:", res.profileObj.email);
     console.log("GoogleToken:", res.accessToken);
+    // store the google login type into the local storage to be used in logout function
+    localStorage.setItem('logintype', "googleaccount");
     history.push("/admin/dashboard");
 
 
@@ -78,6 +120,7 @@ function Login() {
             <input
               type="text"
               name="username"
+              id = "username"
               placeholder="Type your username"
             />
           </div>
@@ -87,6 +130,7 @@ function Login() {
             <input
               type="password"
               name="password"
+              id="password"
               placeholder="Type your password"
             />
 
@@ -97,11 +141,9 @@ function Login() {
           </div>
         </div>
         <div className="footer">
-          <NavLink to="/admin/dashboard">
-            <button type="button" className="btn btn-primary">
+            <button type="button" className="btn btn-primary" onClick={() => onSubmit()}>
               Login
             </button>
-          </NavLink>
         </div>
         <div>
           <label htmlFor="username">Or</label>
