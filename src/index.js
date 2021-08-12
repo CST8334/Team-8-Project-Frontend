@@ -27,7 +27,7 @@ import "./assets/css/demo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import AdminLayout from "layouts/Admin.js";
-import Login from "layouts/Login.js";
+import Login from "layouts/Login.jsx";
 import Register from "layouts/Register.js";
 
 ReactDOM.render(
