@@ -1,7 +1,7 @@
 /**
 *
 * Coded by Chrishanthi Michael for CST8334 - Software Development Project
-*
+* Updated by Claudio Lima with InstagramLogin
 * this class is responsible to create the login page user interface
 * and login with google account and instagram account
 *
@@ -23,8 +23,8 @@ const clientId =
   "165473491550-n2vqg5nucfo8ralusl59adqgbqu65so6.apps.googleusercontent.com";
 
 //InstagramLogin data
-const instagramAppId = "346267973657694";
-const instagramAppSecret = "5bb4bd49966847971d24bb247118f1f9";
+const instagramAppId = "513015486458105";
+const instagramAppSecret = "9b4d1f1fa81ec9f3ad489a985429dbcc";
 
 // this onSubmit method is responsible for local user login
 function onSubmit(){
@@ -169,7 +169,7 @@ function Login() {
               authCallback={authHandler}
               appId={instagramAppId}
               appSecret={instagramAppSecret}
-              redirectUri={"/admin/dashboard"}
+              redirectUri={"https://github.com/CST8334/template"}
           />
 
           <br />

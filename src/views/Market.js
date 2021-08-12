@@ -1,7 +1,28 @@
+//Layout class for Creator Marketplace
+//Developed by Claudio Lima
+
 import React, { Component } from "react";
 import { Row, Col, Container, Card, Image } from "react-bootstrap";
 
 class Market extends Component {
+
+  //constructor
+  constructor(props) {
+      super(props);
+      this.acceptListener = this.acceptListener.bind(this);
+      this.rejectListener = this.rejectListener.bind(this);
+  }
+
+  //method to listen for accept button clicks
+  acceptListener() {
+    alert('Proposal Accepted!');
+  }
+
+  //method to listen for reject button clicks
+  rejectListener() {
+    alert('Proposal Rejected!');
+  }
+
   render() {
     return (
       <div class="container-fluid">
@@ -18,12 +39,12 @@ class Market extends Component {
                   <Card.Body>
                     Brand name: Lenovo Ad: 100 CAD
                     <p>
-                      <a class="btn btn-primary" href="#">
+                      <button class="btn btn-primary" href="#" onClick={this.acceptListener}>
                         Accept
-                      </a>{" "}
-                      <a class="btn" href="#">
+                      </button>
+                      <button class="btn" href="#" onClick={this.rejectListener}>
                         Reject
-                      </a>
+                      </button>
                     </p>
                   </Card.Body>
                 </Card>
@@ -38,12 +59,12 @@ class Market extends Component {
                   <Card.Body>
                     Brand name: Bird Ad: 500 CAD
                     <p>
-                      <a class="btn btn-primary" href="#">
+                      <button class="btn btn-primary" href="#" onClick={this.acceptListener}>
                         Accept
-                      </a>{" "}
-                      <a class="btn" href="#">
+                      </button>
+                      <button class="btn" href="#" onClick={this.rejectListener}>
                         Reject
-                      </a>
+                      </button>
                     </p>
                   </Card.Body>
                 </Card>
@@ -58,12 +79,12 @@ class Market extends Component {
                   <Card.Body>
                     Brand name: Ottawa Park Ad: 1000 CAD
                     <p>
-                      <a class="btn btn-primary" href="#">
+                      <button class="btn btn-primary" href="#" onClick={this.acceptListener}>
                         Accept
-                      </a>{" "}
-                      <a class="btn" href="#">
+                      </button>
+                      <button class="btn" href="#" onClick={this.rejectListener}>
                         Reject
-                      </a>
+                      </button>
                     </p>
                   </Card.Body>
                 </Card>
