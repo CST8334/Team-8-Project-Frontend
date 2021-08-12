@@ -8,6 +8,7 @@ import { MemoryRouter } from "react-router-dom";
 import AdminLayout from "layouts/Admin.js";
 import Login from "layouts/Login.jsx";
 import Register from "layouts/Register.js";
+import { createMemoryHistory } from "history";
 
 let container;
 beforeEach(() => {
@@ -18,19 +19,6 @@ beforeEach(() => {
 afterEach(() => {
   document.body.removeChild(container);
   container = null;
-});
-
-it("login link is right", () => {
-  ReactDOM.render(
-    <MemoryRouter initialEntries={["/"]}>
-      <Login />
-    </MemoryRouter>,
-    container
-  );
-
-  const button = container.querySelector(" div > div > div.footer > a");
-
-  expect(button.getAttribute("href")).toBe("/admin/dashboard");
 });
 
 it("register link is right", () => {
