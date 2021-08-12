@@ -50,7 +50,7 @@ function Admin() {
   };
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
+    //document.scrollingElement.scrollTop = 0;
     mainPanel.current.scrollTop = 0;
     if (
       window.innerWidth < 993 &&
