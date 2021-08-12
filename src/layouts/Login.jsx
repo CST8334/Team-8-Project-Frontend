@@ -26,43 +26,42 @@ const clientId =
 const instagramAppId = "346267973657694";
 const instagramAppSecret = "5bb4bd49966847971d24bb247118f1f9";
 
+// this onSubmit method is responsible for local user login
 function onSubmit(){
-    console.log("User Name is " +document.getElementById("username").value);
+    console.log("Local User Name is " +document.getElementById("username").value);
     console.log("Password is " +document.getElementById("password").value);
+
+    // make sure the user enter the username and password for the local login
+    // if the fields are not empty, make the call to the endpoint to validate the login
     if (document.getElementById("username").value != "" && document.getElementById("password").value != "")
     {
-        const postBody = {
+        // create the json object called loginData with username and password for call the login endpoint
+        const loginData = {
             "user_type": "creator",
             "username": document.getElementById("username").value,
             "password": document.getElementById("password").value,
         };
-        axios.post(`http://localhost:8000/login/`, postBody)
+        // call the backend login endpoint with login data
+        axios.post(`http://localhost:8000/login/`, loginData)
             .then((response) => {
+                // on success login, write the response to the console
                 console.log(response);
-                // Store email and token in local storage
+                // Store the logintype data in local storage, this will be used in the logout function
                 localStorage.setItem('logintype', "localaccount");
-                //this.changeModalState(true);
-                //history.push("/admin/dashboard");
-                console.log(localStorage.getItem("logintype"));
+
+                //console.log(localStorage.getItem("logintype"));
+                // on success login, redirect to the dashboard page.
                 window.location.href = "http://localhost:3000/admin/dashboard";
 
             }, (error) => {
-                //const stateCpy = { ...this.state };
-                //stateCpy.showError = true;
-                if (error.response.data.error_message) {
-                    stateCpy.errorMsg = error.response.data.error_message;
-                } else if (error.response.data.email) {
-                    stateCpy.errorMsg = error.response.data.email[0];
-                } else {
-                    stateCpy.errorMsg = 'Unknown error occurred';
-                }
-                console.error(error.response);
-                this.setState(stateCpy);
+                // if the username or password is incorrect, alert the user
+                var myWindow = window.alert("Local Login Failed. Please check the username and password")
             });
     }
     else
     {
-        console.log("Please enter the username and password");
+        // if the user did not enter the username or password, just alert them to enter it
+        var myWindow = window.alert("Please enter local username and password")
     }
 }
 
@@ -85,6 +84,7 @@ function Login() {
     console.log("GoogleName:", res.profileObj.name);
     console.log("GoogleEmail:", res.profileObj.email);
     console.log("GoogleToken:", res.accessToken);
+    // store the google login type into the local storage to be used in logout function
     localStorage.setItem('logintype', "googleaccount");
     history.push("/admin/dashboard");
 

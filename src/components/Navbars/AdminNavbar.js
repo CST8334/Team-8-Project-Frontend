@@ -28,7 +28,7 @@ function Header() {
     // the function to logout the user
     function Logout()
     {
-    console.clear();
+    // if the user is local account type, clear the local storage and redirect the url to root
     if (localStorage.getItem("logintype")=="localaccount")
     {
             localStorage.clear()
