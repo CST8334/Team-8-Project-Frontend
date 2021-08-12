@@ -1,3 +1,11 @@
+/**
+*
+* Coded by Abdulkadir Atay for CST8334 - Software Development Project
+*
+* This class is responsible to create the Sign Up page user interface
+* and sign up with genuine username, password and invitation code
+*
+*/
 import React from "react";
 import axios from "axios";
 import Button from 'react-bootstrap/Button';
